@@ -1,0 +1,176 @@
+<? $mysqli = new mysqli("127.0.0.1", "root", "", "shope");
+mysqli_query( $mysqli ,"SET NAMES 'cp1251'");
+mysqli_query( $mysqli, "SET CHARACTER SET 'cp1251';");
+mysqli_query( $mysqli ,"SET SESSION collation_connection = 'cp1251_general_ci';");
+ mysqli_query( $mysqli, "SET NAMES 'utf8';");
+mysqli_query( $mysqli, "SET CHARACTER SET 'utf8';");
+mysqli_query( $mysqli ,"SET SESSION collation_connection = 'utf8_general_ci';");
+
+if ($mysqli->connect_errno) {
+    echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+
+$resulta = mysqli_query($mysqli,"SELECT * FROM `prod`");
+
+$mass = array();
+
+while($rws = mysqli_fetch_assoc($resulta)){
+  // $massi[] = $rws['id'];  
+$massh[] = $rws['header']; 
+$massim[]= $rws['img']; 
+$massp[] = $rws['prs']; 
+
+$masshe[] = $rws['header']; 
+$massimg[] = $rws['img']; 
+$masspr[] = $rws['prs']; 
+
+$masshed[] = $rws['header']; 
+$massimgs[] = $rws['img']; 
+$massprs[] = $rws['prs']; 
+}
+$resulta = mysqli_query($mysqli,"SELECT * FROM `prod_opis`");
+$mass = array();
+
+while($rws = mysqli_fetch_assoc($resulta)){
+   $prod[] = $rws['id'];  
+$prodh[] = $rws['header']; 
+$opis[] = $rws['opis']; 
+
+
+//$prod[] = $rws['id'];  
+$prodhe[] = $rws['header']; 
+$opisi[] = $rws['opis']; 
+
+/*
+$masshed[] = $rws['header']; 
+$massimgs[] = $rws['img']; 
+*/
+}
+?>
+
+<?$a=date('Y год');
+
+$navig= [
+'minu'=>'<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>',
+'<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"></a>',
+'<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>',
+'<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>'];
+?>
+
+
+<!doctype html>
+<html>
+<head>
+<title> <?=$title //вывел на страницу зоголовок?> </title>
+<meta charset = "UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"href="css/css.css">
+<link rel="stylesheet" type="text/css"href="css/csss.css">
+<link type='text/css' href='style.css' rel='stylesheet'  />
+
+</head>
+<body>
+
+<header><br><h1>PhP_one___///</h1><br><br></header>
+<new  class="n">
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+   <? foreach($navig as $Keycity1=>$c):?>
+       <?echo $c;?>
+    </div>
+  </div>
+ 
+    <?php endforeach;?>
+  </div>
+</div>
+</new>
+<content>
+
+<!--<div class="grid">
+<a href=" class="btn btn-primary   data-toggle="modal" data-target="#exampleModalCenter" ><?
+  $hed=$prodh[1]; 
+  $op=$opis[1];
+$val= $massh[1];
+$vali= $massim[1];
+$valp= $massp[1];
+   echo $val;
+   echo $vali;
+   echo $valp;
+?>
+</a>
+</div>-->
+
+
+<div class="grid">
+
+<a href=" class="btn btn-primary   data-toggle="modal" data-target="#exampleModalCenter" ><?
+  $hedPod=$prodhe[0];
+  $opis =$opisi[0]; 
+ echo $vilc=$masshe[2];
+$vilt=$massimg[2];
+echo $vilt;
+$vilp=$masspr[2];
+echo $vilp;
+?>
+</a>
+</div> 
+
+
+
+
+
+<?function mod($po1 ,$po2){?>
+<!-- Modall -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Товар</h5>
+       
+      </div>
+      <div class="modal-body">
+      <?=$po1 ,$po2 ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div> 
+<?}
+
+     
+    mod($hedPod, $opis);  //товар 1
+    mod( $hed,$op);       //товар 2   ?>
+    
+
+
+<!--<div class="grid">
+<a href="'.$file.' class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><?=$valhed= $masshed[0];
+     
+$valimgs=$massimgs[0];  
+   echo $valimgs; 
+$valprs=$massprs[0];
+   echo $valprs;
+?>
+   </a>
+</div> -->
+
+</content>
+
+
+<footer class="footer">
+<div class="dateTxt"><?=$a?></div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body></html>
